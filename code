@@ -1,0 +1,116 @@
+#define pipeline A0
+#define cover A1
+#define motor A2
+#define M1 7
+#define M2 8
+int x;
+int h,l;
+int h1,l1;
+int h2,l2;
+
+
+
+void setup() {
+  Serial.begin(9600);
+pinMode(pipeline,INPUT);  // put your setup code here, to run once:
+pinMode(cover,INPUT);
+
+pinMode(motor, INPUT);
+pinMode(M1,OUTPUT);
+pinMode(M2,OUTPUT);
+}
+
+void loop() {
+
+for(x=1;x<1000;x++){
+
+if(analogRead(motor)<880){
+
+    l2++;
+
+  }else{
+
+h2++;
+  
+}
+
+}
+
+if(h2>l2){
+
+digitalWrite(M1,HIGH);
+digitalWrite(M2,LOW);
+  
+}else{
+
+
+digitalWrite(M1,LOW);
+digitalWrite(M2,LOW);
+  
+}
+
+
+for(x=1;x<1000;x++){
+
+if(analogRead(pipeline)<920){
+
+    l++;
+
+  }else{
+
+h++;
+  
+}
+
+}
+
+for(x=1;x<1000;x++){
+
+if(analogRead(cover)<920){
+
+    l1++;
+
+  }else{
+
+h1++;
+  
+}
+
+  
+}
+  
+
+if((l>h)&&(l1>h1)){
+
+    Serial.print("m");
+  
+            
+  }
+
+  
+ if((l>h)&&(h1>l1)){
+
+Serial.print("l");
+  
+}
+
+ 
+  if((h>l)&&(h1>l1)){
+ 
+  Serial.print("k");
+  
+}
+
+if((h>l)&&(l1>h1)){
+  Serial.print("j");
+
+}
+
+h=0;
+l=0;
+h1=0;
+l1=0;
+  h2=0;
+  l2=0;
+
+}
